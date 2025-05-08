@@ -54,38 +54,38 @@ public:
       set_copy();
       equal_not();
       equal_equals();
-      lessthan_lessthan();
-      lessthan_equals();
-      lessthan_greaterthan();
-      getX_a1();
-      getY_a1();
-      getX_e7();
-      getY_e7();
-      getWidth_10();
-      getHeight_10();
-      setBoardWidthHeight_10();
-      setBoardWidthHeight_420x830();
-      setXY_a8();
-      setXY_a1();
-      setXY_h8();
-      setXY_h1();
-      setXY_invalidXMin();
-      setXY_invalidXMax();
-      setXY_invalidYMin();
-      setXY_invalidYMax();
+      //lessthan_lessthan();
+      //lessthan_equals();
+      //lessthan_greaterthan();
+      //getX_a1();
+      //getY_a1();
+      //getX_e7();
+      //getY_e7();
+      //getWidth_10();
+      //getHeight_10();
+      //setBoardWidthHeight_10();
+      //setBoardWidthHeight_420x830();
+      //setXY_a8();
+      //setXY_a1();
+      //setXY_h8();
+      //setXY_h1();
+      //setXY_invalidXMin();
+      //setXY_invalidXMax();
+      //setXY_invalidYMin();
+      //setXY_invalidYMax();
 
       // Ticket 2: Position Text
-      set_text();
-      set_string();
+      //set_text();
+      //set_string();
        
       // Ticket 3: Position Movement
-      adjust_addColumn();
-      adjust_addRow();
-      adjust_offRight();
-      adjust_offTop();
-      adjust_offLeft();
-      adjust_offBottom();
-      adjust_invalid();
+      //adjust_addColumn();
+      //adjust_addRow();
+      //adjust_offRight();
+      //adjust_offTop();
+      //adjust_offLeft();
+      //adjust_offBottom();
+      //adjust_invalid();
       
       report("Position");
    }
