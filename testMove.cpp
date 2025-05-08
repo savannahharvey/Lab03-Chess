@@ -2,7 +2,7 @@
  * Header File:
  *    TEST MOVE 
  * Author:
- *    <your name here>
+ *    McKay Larman
  * Summary:
  *    test the Move class
  ************************************************************************/
@@ -20,8 +20,15 @@
   **************************************/
 void TestMove::constructor_default() 
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // Setup
+   // Exercise
+   Move m = Move();
+   // Verify
+   assertEquals(m.source.getRow(), -1);
+   assertEquals(m.source.getCol(), -1);
+   assertEquals(m.dest.getRow(),   -1);
+   assertEquals(m.dest.getCol(),   -1);
+}  // Teardown
 
  /*************************************
   * CONSTRUCTOR : standard string move

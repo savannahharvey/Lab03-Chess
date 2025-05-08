@@ -20,6 +20,16 @@ using namespace std;
  ***************************************************/
 Move::Move()
 {
+   // start with something
+   this->source = Position();
+   this->dest   = Position();
+   
+}
+
+Move::Move(char* t)
+{
+   Position source = Position();
+//   source()
 }
 
 
