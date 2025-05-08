@@ -57,8 +57,22 @@ public:
    bool isValid()   const         { return (getRow() == -1 || getCol() == -1) ? false : true ; }
    void setValid()                {              }
    void setInvalid()              {              }
-   bool operator <  (const Position & rhs) const { return true; }
-   bool operator == (const Position & rhs) const { return true; }
+   bool operator <  (const Position & rhs) const
+   {
+       if (rhs.colRow > this->colRow)
+       {
+           return true;
+       }
+       return false;
+   }
+   bool operator == (const Position & rhs) const
+   {
+       if (rhs.colRow == this->colRow)
+       {
+           return true;
+       }
+       return false;
+   }
    bool operator != (const Position & rhs) const { return true; }
    const Position& operator =  (const Position& rhs)
    {
