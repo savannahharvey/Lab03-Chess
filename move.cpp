@@ -114,19 +114,12 @@ PieceType Move::pieceTypeFromLetter(char letter) const
 /***************************************************
  * MOVE : EQUALS - EQUALS OPERATOR
  ***************************************************/
-bool Move::operator==(Move &rhs) {
-   return source.getLocation() == rhs.source.getLocation() &&
-          dest.getLocation() == rhs.dest.getLocation(); // &&
+//bool Move::operator==(Move &rhs) {
+//   return source.getLocation() == rhs.source.getLocation() &&
+//          dest.getLocation() == rhs.dest.getLocation(); // &&
 //          promote == rhs.promote &&
 //          capture == rhs.capture &&
 //          moveType == rhs.moveType &&
 //          (isWhite == rhs.isWhite) &&
 //          text == rhs.text;
-}
-
-/***************************************************
- * MOVE : LESS THAN OPERATOR
- ***************************************************/
-bool Move::operator<(Move &rhs) {
-   return dest.getLocation() < rhs.dest.getLocation();
-}
+//}

@@ -360,7 +360,6 @@ void TestBoard::set_a1()
    Piece* pSave = board.board[0][0];
    board.board[0][0] = &piece;
    Position00 pos;
-   Piece* p = nullptr;
    // exercise
    board[pos].fWhite = false;
    // verify
@@ -416,7 +415,6 @@ void TestBoard::set_h8()
    Piece* pSave = board.board[7][7];
    board.board[7][7] = &piece;
    Position77 pos;
-   Piece* p = nullptr;
    // exercise
    board[pos].fWhite = false;
    // verify
@@ -472,7 +470,6 @@ void TestBoard::set_a8()
    Piece* pSave = board.board[0][7];
    board.board[0][7] = &piece;
    Position07 pos;
-   Piece* p = nullptr;
    // exercise
    board[pos].fWhite = false;
    // verify

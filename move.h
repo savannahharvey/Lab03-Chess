@@ -34,8 +34,12 @@ public:
    Move(char* t);
    
    // operators
-   bool operator == (Move &rhs);
-   bool operator <  (Move &rhs);
+   bool operator == (Move &rhs) { return source.getLocation() == rhs.source.getLocation() &&
+                                           dest.getLocation() == rhs.dest.getLocation(); }
+   bool operator <  (Move &rhs) { return dest.getLocation() < rhs.dest.getLocation(); }
+   
+   // Methods
+   string getText();
 
 
 private:
