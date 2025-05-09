@@ -26,14 +26,101 @@ Move::Move()
 }
 
 /***************************************************
- * MOVE : STRING CONSTRUCTOR
+ * MOVE : PARSE
  ***************************************************/
-Move::Move(char* t)
+void Move::parse(char* t)
 {
+   // Convert char* to string and start the iterator.
+   string text(t);
+   string::const_iterator it = text.cbegin();
+
+   // get the source
+   int col = *it - 'a';
+   it++;
+   int row = *it - '1';
+   it++;
+   this->source.setCol(col);
+   this->source.setRow(row);
+
+   // get the destination
+   col = *it - 'a';
+   it++;
+   row = *it - '1';
+   it++;
+   this->dest.setCol(col);
+   this->dest.setRow(row);
    
-   this->source = Position(t[0], t[1]);
-   this->dest   = Position(t[2], t[3]);
-   this->moveType = MOVE;
+   // If there is not more text, then the moveType is Move.
+   if (it != text.end())
+   {
+      // capture and promotion information
+      switch (*it)
+      {
+            // Captures
+         case 'p':   // capture a pawn
+            this->capture = PAWN;
+            this->moveType = MOVE;
+            break;
+         case 'n':   // capture a knight
+            this->capture = KNIGHT;
+            this->moveType = MOVE;
+            break;
+         case 'b':   // capture a bishop
+            this->capture = BISHOP;
+            this->moveType = MOVE;
+            break;
+         case 'r':   // capture a rook
+            this->capture = ROOK;
+            this->moveType = MOVE;
+            break;
+         case 'q':   // capture a queen
+            this->capture = QUEEN;
+            this->moveType = MOVE;
+            break;
+         case 'k':   // !! you can't capture a king you silly!
+            this->capture = KING;
+            this->moveType = MOVE;
+            break;
+            
+            // Castling & En-Passant
+         case 'c':  // short castling or king's castle
+            this->moveType = CASTLE_KING;
+            break;
+         case 'C':  // long castling or queen's castle
+            this->moveType = CASTLE_QUEEN;
+            break;
+         case 'E':  // En-passant
+            this->moveType = ENPASSANT;
+            break;
+            
+            // Promotion
+         case 'N':  // Promote to knight
+            this->promote = KNIGHT;
+            this->moveType = MOVE;
+            break;
+         case 'B':  // Promote to Bishop
+            this->promote = BISHOP;
+            this->moveType = MOVE;
+            break;
+         case 'R':  // Promote to Rook
+            this->promote = ROOK;
+            this->moveType = MOVE;
+            break;
+         case 'Q':  // Promote to Queen
+            this->promote = QUEEN;
+            this->moveType = MOVE;
+            break;
+            
+            // This shouldnt happen.
+         default:
+            this->moveType = MOVE_ERROR;
+            break;
+      }
+   }
+   else
+   {
+      this->moveType = MOVE;
+   }
 }
 
 /***************************************************
@@ -111,15 +198,3 @@ PieceType Move::pieceTypeFromLetter(char letter) const
    return piece;
 }
 
-/***************************************************
- * MOVE : EQUALS - EQUALS OPERATOR
- ***************************************************/
-//bool Move::operator==(Move &rhs) {
-//   return source.getLocation() == rhs.source.getLocation() &&
-//          dest.getLocation() == rhs.dest.getLocation(); // &&
-//          promote == rhs.promote &&
-//          capture == rhs.capture &&
-//          moveType == rhs.moveType &&
-//          (isWhite == rhs.isWhite) &&
-//          text == rhs.text;
-//}
