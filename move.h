@@ -2,7 +2,7 @@
  * Header File:
  *    MOVE 
  * Author:
- *    <your name here>
+ *    McKay Larman
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -32,11 +32,14 @@ public:
    // constructor
    Move();
    Move(char* t);
+   
+   // operators
+   bool operator == (Move & rhs);
 
 
 private:
-   char letterFromPieceType(PieceType pt)     const { return 'z';   }
-   PieceType pieceTypeFromLetter(char letter) const { return SPACE; }
+   char letterFromPieceType(PieceType pt)     const;
+   PieceType pieceTypeFromLetter(char letter) const;
 
 
 
