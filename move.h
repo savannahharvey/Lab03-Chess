@@ -37,9 +37,10 @@ public:
    bool operator == (Move &rhs) { return source.getLocation() == rhs.source.getLocation() &&
                                            dest.getLocation() == rhs.dest.getLocation(); }
    bool operator <  (Move &rhs) { return dest.getLocation() < rhs.dest.getLocation(); }
+   Move operator =  (char* t) { return *this; }
    
    // Methods
-   string getText();
+   string getText() { return text; }
 
 
 private:

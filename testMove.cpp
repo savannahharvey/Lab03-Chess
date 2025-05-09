@@ -129,9 +129,15 @@ void TestMove::read_castleQueen()
   *         type  =MOVE
   **************************************/
 void TestMove::assign_simple()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   // Exercise
+   moveLhs = "e5e6";
+   // Verify
+   assertUnit(moveLhs.source.colRow == 0x44);
+   assertUnit(moveLhs.dest.colRow == 0x45);
+   assertUnit(moveLhs.moveType == Move::MOVE);
+}  // Teardown
 
  /*************************************
   * ASSIGN capture move
@@ -142,9 +148,16 @@ void TestMove::assign_simple()
   *         capture=ROOK
   **************************************/
 void TestMove::assign_capture()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   // Exercise
+   moveLhs = "e5d6r";
+   // Verify
+   assertUnit(moveLhs.source.colRow == 0x44);
+   assertUnit(moveLhs.dest.colRow == 0x35);
+   assertUnit(moveLhs.moveType == Move::MOVE);
+   assertUnit(moveLhs.capture == PieceType::ROOK);
+}  // Teardown
 
  /*************************************
   * ASSIGN enpassant move
@@ -154,9 +167,15 @@ void TestMove::assign_capture()
   *         type  =ENPASSANT
   **************************************/
 void TestMove::assign_enpassant()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   // Exercise
+   moveLhs = "e5f6E";
+   // Verify
+   assertUnit(moveLhs.source.colRow == 0x44);
+   assertUnit(moveLhs.dest.colRow == 0x55);
+   assertUnit(moveLhs.moveType == Move::ENPASSANT);
+}  // Teardown
 
  /*************************************
   * ASSIGN king side castle
@@ -166,9 +185,15 @@ void TestMove::assign_enpassant()
   *         type  =CASTLE_KING
   **************************************/
 void TestMove::assign_castleKing()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   // Exercise
+   moveLhs = "e1g1c";
+   // Verify
+   assertUnit(moveLhs.source.colRow == 0x40);
+   assertUnit(moveLhs.dest.colRow == 0x60);
+   assertUnit(moveLhs.moveType == Move::CASTLE_KING);
+}  // Teardown
 
  /*************************************
   * ASSIGN queen side castle
@@ -178,9 +203,15 @@ void TestMove::assign_castleKing()
   *         type  =CASTLE_QUEEN
   **************************************/
 void TestMove::assign_castleQueen()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   // Exercise
+   moveLhs = "e1c1C";
+   // Verify
+   assertUnit(moveLhs.source.colRow == 0x40);
+   assertUnit(moveLhs.dest.colRow == 0x20);
+   assertUnit(moveLhs.moveType == Move::CASTLE_QUEEN);
+}  // Teardown
 
  /*************************************
   * GET TEXT simple move
@@ -483,7 +514,7 @@ void TestMove::equal_equals()
  /*************************************
   * LESS THAN - LESS THAN
   * Input : b2b2 < b2b4
-  * Output: false ??
+  * Output: true
   *    Note that the less-than operator is needed
   *    so std::set<T> can sort the elements. Thus,
   *    any T in a set must define less-than. In this
