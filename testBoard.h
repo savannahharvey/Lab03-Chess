@@ -23,24 +23,24 @@ public:
    void run()
    {
       // Ticket 6: Board Core
-      /*construct_dummyBoard();
-      construct_emptyBoard();
-      getCurrentMove_initial();
-      getCurrentMove_second();
-      getCurrentMove_middleWhite();
-      getCurrentMove_middleBlack();
-      whiteTurn_initial();
-      whiteTurn_second();
-      whiteTurn_middleWhite();
-      whiteTurn_middleBlack();*/
+      construct_dummyBoard();
+      //construct_emptyBoard();
+      //getCurrentMove_initial();
+      //getCurrentMove_second();
+      //getCurrentMove_middleWhite();
+      //getCurrentMove_middleBlack();
+      //whiteTurn_initial();
+      //whiteTurn_second();
+      //whiteTurn_middleWhite();
+      //whiteTurn_middleBlack();
 
       // Ticket 7: Board Fetch
-      /*fetch_a1();
-      fetch_h8();
-      fetch_a8();
-      set_a1();
-      set_h8();
-      set_a8();*/
+      //fetch_a1();
+      //fetch_h8();
+      //fetch_a8();
+      //set_a1();
+      //set_h8();
+      //set_a8();
 
       report("Board");
    }

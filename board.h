@@ -65,7 +65,74 @@ class BoardDummy : public Board
 {
    friend TestBoard; 
 public:
-   BoardDummy()                                           {                }
+    BoardDummy()
+    {
+        numMoves = 0;
+        board[0][0] = nullptr;
+        board[1][0] = nullptr;
+        board[2][0] = nullptr;
+        board[3][0] = nullptr;
+        board[4][0] = nullptr;
+        board[5][0] = nullptr;
+        board[6][0] = nullptr;
+        board[7][0] = nullptr;
+        board[0][1] = nullptr;
+        board[1][1] = nullptr;
+        board[2][1] = nullptr;
+        board[3][1] = nullptr;
+        board[4][1] = nullptr;
+        board[5][1] = nullptr;
+        board[6][1] = nullptr;
+        board[7][1] = nullptr;
+        board[0][2] = nullptr;
+        board[1][2] = nullptr;
+        board[2][2] = nullptr;
+        board[3][2] = nullptr;
+        board[4][2] = nullptr;
+        board[5][2] = nullptr;
+        board[6][2] = nullptr;
+        board[7][2] = nullptr;
+        board[0][3] = nullptr;
+        board[1][3] = nullptr;
+        board[2][3] = nullptr;
+        board[3][3] = nullptr;
+        board[4][3] = nullptr;
+        board[5][3] = nullptr;
+        board[6][3] = nullptr;
+        board[7][3] = nullptr;
+        board[0][4] = nullptr;
+        board[1][4] = nullptr;
+        board[2][4] = nullptr;
+        board[3][4] = nullptr;
+        board[4][4] = nullptr;
+        board[5][4] = nullptr;
+        board[6][4] = nullptr;
+        board[7][4] = nullptr;
+        board[0][5] = nullptr;
+        board[1][5] = nullptr;
+        board[2][5] = nullptr;
+        board[3][5] = nullptr;
+        board[4][5] = nullptr;
+        board[5][5] = nullptr;
+        board[6][5] = nullptr;
+        board[7][5] = nullptr;
+        board[0][6] = nullptr;
+        board[1][6] = nullptr;
+        board[2][6] = nullptr;
+        board[3][6] = nullptr;
+        board[4][6] = nullptr;
+        board[5][6] = nullptr;
+        board[6][6] = nullptr;
+        board[7][6] = nullptr;
+        board[0][7] = nullptr;
+        board[1][7] = nullptr;
+        board[2][7] = nullptr;
+        board[3][7] = nullptr;
+        board[4][7] = nullptr;
+        board[5][7] = nullptr;
+        board[6][7] = nullptr;
+        board[7][7] = nullptr;
+    }
    ~BoardDummy()                                          {                }
 
    void display(const Position& posHover,
