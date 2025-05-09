@@ -19,8 +19,7 @@
   *         dest  =INVALID
   **************************************/
 void TestMove::constructor_default() 
-{
-   // Setup
+{  // Setup
    // Exercise
    Move m = Move();
    // Verify
@@ -38,12 +37,11 @@ void TestMove::constructor_default()
   *         type  =MOVE
   **************************************/
 void TestMove::constructString_simple()
-{
-   // Setup
-   std::string str = "e5e6";
-   char* t = &str[0];
+{  // Setup
+//   std::string str = "e5e6";
+//   char* t = &str[0];
    // Exercise
-   Move m = Move(t);
+   Move m = Move("e5e6");
    // Verify
    assertEquals(m.source.getRow(), 4);
    assertEquals(m.source.getCol(), 4);
@@ -65,7 +63,7 @@ void TestMove::read_simple()
    std::string str = "e5e6";
    char* t = &str[0];
    // Exercise
-   Move m = Move(t);
+   Move m = t;
    // Verify
    assertEquals(m.source.getRow(), 4);
    assertEquals(m.source.getCol(), 4);
@@ -449,14 +447,17 @@ void TestMove::pieceTypeFromLetter_king()
   **************************************/
 void TestMove::equal_not()
 {  // Setup
-   Move first;
-   Move second;
-//   second.isWhite = false;
-   bool equals;
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 4);   // b5 -> col 1, row 4
+   bool response;
    // Exercise
-   equals = first == second;
+   response = moveLhs == moveRhs;
    // Verify
-   assertEquals(equals, false);
+   assertEquals(response, false);
 }  // Teardown
 
  /*************************************
@@ -466,19 +467,23 @@ void TestMove::equal_not()
   **************************************/
 void TestMove::equal_equals()
 {  // Setup
-   Move first;
-   Move second;
-   bool equals;
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
    // Exercise
-   equals = first == second;
+   response = moveLhs == moveRhs;
    // Verify
-   assertEquals(equals, true);
+   assertEquals(response, true);
 }  // Teardown
 
  /*************************************
   * LESS THAN - LESS THAN
   * Input : b2b2 < b2b4
-  * Output: false
+  * Output: false ??
   *    Note that the less-than operator is needed
   *    so std::set<T> can sort the elements. Thus,
   *    any T in a set must define less-than. In this
@@ -486,9 +491,19 @@ void TestMove::equal_equals()
   *     destination's Position's location.
   **************************************/
 void TestMove::lessthan_lessthan()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == true); // is the false a typo?
+}  // Teardown
 
  /*************************************
   * LESS THAN - EQUALS
@@ -496,9 +511,20 @@ void TestMove::lessthan_lessthan()
   * Output: false
   **************************************/
 void TestMove::lessthan_equals()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == false);
+}  // Teardown
+
 
  /*************************************
   * LESS THAN - GREATAER THAN
@@ -506,6 +532,17 @@ void TestMove::lessthan_equals()
   * Output: false
   **************************************/
 void TestMove::lessthan_greaterthan()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == false);
+}  // Teardown
+

@@ -34,7 +34,8 @@ public:
    Move(char* t);
    
    // operators
-   bool operator == (Move & rhs);
+   bool operator == (Move &rhs);
+   bool operator <  (Move &rhs);
 
 
 private:
