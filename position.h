@@ -9,9 +9,6 @@
 
 #pragma once
 
-#include <iostream>
-using namespace std;
-
 #include <cassert>
 
 #include <string>
@@ -176,6 +173,18 @@ public:
    void adjustCol(int dCol)   { }
    const Position & operator += (const Delta & rhs)
    {
+       int row = rhs.dRow;
+       int col = rhs.dCol;
+
+       if (getCol() + col > 7 || getCol() + col < 0)
+           set(15, 15);
+       if (getRow() + row > 7 || getRow() + row < 0)
+           set(15, 15);
+       if (getCol() == -1 || getRow() == -1)
+           set(15, 15);
+       else
+           set(getCol() + col, getRow() + row);
+
        return *this;
    }
    Position operator + (const Delta & rhs) const { return *this; }
