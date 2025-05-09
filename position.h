@@ -119,8 +119,27 @@ public:
    //          such as "d4"
    
    Position(const char * s) : colRow(0x99) {   }
-   const Position & operator =  (const char     * rhs) { return *this; }
-   const Position & operator =  (const string   & rhs) { return *this; }
+   const Position & operator =  (const char     * rhs)
+   {
+       string rhsString = rhs;
+       string::const_iterator it = rhsString.cbegin();
+       int col = *it - 'a';
+       it++;
+       int row = *it - '1';
+       it++;
+       colRow = col * 16 + row;
+       return *this;
+   }
+   const Position & operator =  (const string   & rhs)
+   {
+       string::const_iterator it = rhs.cbegin();
+       int col = *it - 'a';
+       it++;
+       int row = *it - '1';
+       it++;
+       colRow = col * 16 + row;
+       return *this;
+   }
 
    
    // Pixels:    The Position class can work with screen coordinates,
@@ -155,7 +174,10 @@ public:
    Position(const Position & rhs, const Delta & delta) : colRow(-1) {  }
    void adjustRow(int dRow)   { }
    void adjustCol(int dCol)   { }
-   const Position & operator += (const Delta & rhs) { return *this; }
+   const Position & operator += (const Delta & rhs)
+   {
+       return *this;
+   }
    Position operator + (const Delta & rhs) const { return *this; }
 
 private:
