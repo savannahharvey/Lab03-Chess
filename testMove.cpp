@@ -19,8 +19,7 @@
   *         dest  =INVALID
   **************************************/
 void TestMove::constructor_default() 
-{
-   // Setup
+{  // Setup
    // Exercise
    Move m = Move();
    // Verify
@@ -38,9 +37,18 @@ void TestMove::constructor_default()
   *         type  =MOVE
   **************************************/
 void TestMove::constructString_simple()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+//   std::string str = "e5e6";
+//   char* t = &str[0];
+   // Exercise
+   Move m = Move("e5e6");
+   // Verify
+   assertEquals(m.source.getRow(), 4);
+   assertEquals(m.source.getCol(), 4);
+   assertEquals(m.dest.getRow(),   4);
+   assertEquals(m.dest.getCol(),   5);
+   assertEquals(m.moveType, Move::MOVE);
+}  // Teardown
 
  /*************************************
   * READ simple move 
@@ -51,8 +59,18 @@ void TestMove::constructString_simple()
   **************************************/
 void TestMove::read_simple()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // Setup
+   std::string str = "e5e6";
+   char* t = &str[0];
+   // Exercise
+   Move m = t;
+   // Verify
+   assertEquals(m.source.getRow(), 4);
+   assertEquals(m.source.getCol(), 4);
+   assertEquals(m.dest.getRow(),   4);
+   assertEquals(m.dest.getCol(),   5);
+   assertEquals(m.moveType, Move::MOVE);
+}  // Teardown
 
  /*************************************
   * READ capture move 
@@ -232,9 +250,14 @@ void TestMove::getText_castleQueen()
   * Output:  ' '
   **************************************/
 void TestMove::letterFromPieceType_space()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::SPACE);
+   // Verify
+   assertEquals(type, ' ');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE pawn
@@ -242,9 +265,14 @@ void TestMove::letterFromPieceType_space()
   * Output:  'p'
   **************************************/
 void TestMove::letterFromPieceType_pawn()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::PAWN);
+   // Verify
+   assertEquals(type, 'p');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE bishop
@@ -252,9 +280,14 @@ void TestMove::letterFromPieceType_pawn()
   * Output:  'b'
   **************************************/
 void TestMove::letterFromPieceType_bishop()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::BISHOP);
+   // Verify
+   assertEquals(type, 'b');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE knight
@@ -262,9 +295,14 @@ void TestMove::letterFromPieceType_bishop()
   * Output:  'n'
   **************************************/
 void TestMove::letterFromPieceType_knight()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::KNIGHT);
+   // Verify
+   assertEquals(type, 'n');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE rook
@@ -272,9 +310,14 @@ void TestMove::letterFromPieceType_knight()
   * Output:  'r'
   **************************************/
 void TestMove::letterFromPieceType_rook()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::ROOK);
+   // Verify
+   assertEquals(type, 'r');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE queen
@@ -282,9 +325,14 @@ void TestMove::letterFromPieceType_rook()
   * Output:  'q'
   **************************************/
 void TestMove::letterFromPieceType_queen()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::QUEEN);
+   // Verify
+   assertEquals(type, 'q');
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE king
@@ -292,9 +340,14 @@ void TestMove::letterFromPieceType_queen()
   * Output:  'k'
   **************************************/
 void TestMove::letterFromPieceType_king()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   char type;
+   Move m;
+   // exercise
+   type = m.letterFromPieceType(PieceType::KING);
+   // Verify
+   assertEquals(type, 'k');
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER pawn
@@ -302,9 +355,14 @@ void TestMove::letterFromPieceType_king()
   * Output:  PAWN
   **************************************/
 void TestMove::pieceTypeFromLetter_pawn()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('p');
+   // Verify
+   assertEquals(piece, PAWN);
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER bishop
@@ -312,9 +370,14 @@ void TestMove::pieceTypeFromLetter_pawn()
   * Output:  BISHOP
   **************************************/
 void TestMove::pieceTypeFromLetter_bishop()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('b');
+   // Verify
+   assertEquals(piece, BISHOP);
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER knight
@@ -322,9 +385,14 @@ void TestMove::pieceTypeFromLetter_bishop()
   * Output:  KNIGHT
   **************************************/
 void TestMove::pieceTypeFromLetter_knight()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('n');
+   // Verify
+   assertEquals(piece, KNIGHT);
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER rook
@@ -332,9 +400,14 @@ void TestMove::pieceTypeFromLetter_knight()
   * Output:  ROOK
   **************************************/
 void TestMove::pieceTypeFromLetter_rook()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('r');
+   // Verify
+   assertEquals(piece, ROOK);
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER queen
@@ -342,9 +415,14 @@ void TestMove::pieceTypeFromLetter_rook()
   * Output:  QUEEN
   **************************************/
 void TestMove::pieceTypeFromLetter_queen()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('q');
+   // Verify
+   assertEquals(piece, QUEEN);
+}  // Teardown
 
  /*************************************
   * PIECE TYPE FROM LETTER king
@@ -352,9 +430,14 @@ void TestMove::pieceTypeFromLetter_queen()
   * Output:  KING
   **************************************/
 void TestMove::pieceTypeFromLetter_king() 
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   PieceType piece;
+   Move m;
+   // Exercise
+   piece = m.pieceTypeFromLetter('k');
+   // Verify
+   assertEquals(piece, KING);
+}  // Teardown
 
 
  /*************************************
@@ -363,9 +446,19 @@ void TestMove::pieceTypeFromLetter_king()
   * Output: false
   **************************************/
 void TestMove::equal_not()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 4);   // b5 -> col 1, row 4
+   bool response;
+   // Exercise
+   response = moveLhs == moveRhs;
+   // Verify
+   assertEquals(response, false);
+}  // Teardown
 
  /*************************************
   * EQUAL - EQUALS
@@ -373,14 +466,24 @@ void TestMove::equal_not()
   * Output: true
   **************************************/
 void TestMove::equal_equals()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
+   // Exercise
+   response = moveLhs == moveRhs;
+   // Verify
+   assertEquals(response, true);
+}  // Teardown
 
  /*************************************
   * LESS THAN - LESS THAN
   * Input : b2b2 < b2b4
-  * Output: false
+  * Output: false ??
   *    Note that the less-than operator is needed
   *    so std::set<T> can sort the elements. Thus,
   *    any T in a set must define less-than. In this
@@ -388,9 +491,19 @@ void TestMove::equal_equals()
   *     destination's Position's location.
   **************************************/
 void TestMove::lessthan_lessthan()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == true); // is the false a typo?
+}  // Teardown
 
  /*************************************
   * LESS THAN - EQUALS
@@ -398,9 +511,20 @@ void TestMove::lessthan_lessthan()
   * Output: false
   **************************************/
 void TestMove::lessthan_equals()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == false);
+}  // Teardown
+
 
  /*************************************
   * LESS THAN - GREATAER THAN
@@ -408,6 +532,17 @@ void TestMove::lessthan_equals()
   * Output: false
   **************************************/
 void TestMove::lessthan_greaterthan()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move moveLhs;
+   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   Move moveRhs;
+   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
+   moveRhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   bool response;
+   // Exercise
+   response = moveLhs < moveRhs;
+   // Verify
+   assertUnit(response == false);
+}  // Teardown
+
