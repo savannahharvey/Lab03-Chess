@@ -14,20 +14,23 @@
 using namespace std;
 
 
-// we really REALLY need to delete this.
-Space space;
-
 /***********************************************
 * BOARD : GET
 *         Get a piece from a given position.
 ***********************************************/
 const Piece& Board::operator [] (const Position& pos) const
 {
-   return space;
+   int col = pos.getCol();
+   int row = pos.getRow();
+
+   return *board[col][row];
 }
 Piece& Board::operator [] (const Position& pos)
 {
-   return space;
+   int col = pos.getCol();
+   int row = pos.getRow();
+
+   return *board[col][row];
 }
 
 
