@@ -30,13 +30,20 @@ public:
    friend TestBoard;
 
    // constructor
-   Move();
+   Move()
+   {
+      this->source = Position(); // default to 0x99
+      this->dest   = Position(); // default to 0x99
+      this->promote = INVALID;
+      this->capture = INVALID;
+      this->moveType = MOVE_ERROR;
+   }
    Move(char* t) { this->parse(t); }
    
    // operators
-   bool operator == (Move &rhs) const { return source.getLocation() == rhs.source.getLocation() &&
+   bool operator <  (const Move &rhs) const { return dest.getLocation() < rhs.dest.getLocation(); }
+   bool operator == (const Move &rhs) const { return source.getLocation() == rhs.source.getLocation() &&
                                                  dest.getLocation() == rhs.dest.getLocation(); }
-   bool operator <  (Move &rhs) const { return dest.getLocation() < rhs.dest.getLocation(); }
    Move& operator = (char* t)         { this->parse(t); return *this; }
    
    // Methods
@@ -45,7 +52,7 @@ public:
 
 private:
    void parse(char* t);
-   char* lettersFromPosition(Position &pos);
+   char* lettersFromPosition(Position &pos) const;
    char letterFromPieceType(PieceType pt)     const;
    PieceType pieceTypeFromLetter(char letter) const;
 

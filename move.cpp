@@ -2,7 +2,7 @@
  * Source File:
  *    MOVE 
  * Author:
- *    <your name here>
+ *   McKay Larman
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -15,17 +15,6 @@
 #include <cstring>
 
 using namespace std;
-
-/***************************************************
- * MOVE : DEFAULT CONSTRUCTOR
- ***************************************************/
-Move::Move()
-{
-   // start with something
-   this->source = Position();
-   this->dest   = Position();
-   this->capture = INVALID;
-}
 
 /***************************************************
  * MOVE : PARSE
@@ -192,7 +181,7 @@ string Move::getText()
    strcat(text, sourceText); // text[0] text[1]
    strcat(text, destText); // text[2] text[3]
    
-   // Assign the last caracter if applicable
+   // Assign the last caracter
    if (moveType == MOVE && capture == INVALID) // No extra characters
    {
       text[4] = '\0'; // null terminate
@@ -202,12 +191,12 @@ string Move::getText()
       text[4] = 'E';
       text[5] = '\0'; // null terminate
    }
-   else if (moveType == CASTLE_KING) // Castle
+   else if (moveType == CASTLE_KING) // Castle King
    {
       text[4] = 'c';
       text[5] = '\0'; // null terminate
    }
-   else if (moveType == CASTLE_QUEEN) // Castle
+   else if (moveType == CASTLE_QUEEN) // Castle Queen
    {
       text[4] = 'C';
       text[5] = '\0'; // null terminate
@@ -219,6 +208,7 @@ string Move::getText()
    }
    // Convert to string
    string t = text;
+   this->text = t;
    return t;
 }
 
@@ -227,7 +217,7 @@ string Move::getText()
  * convert a chess position object into the Universal Chess
  * Interface notation representation.
  ***************************************************/
-char* Move::lettersFromPosition(Position &pos)
+char* Move::lettersFromPosition(Position &pos) const
 {
    // This will be 2 characters long.
    char* text = new char[3];
@@ -263,7 +253,7 @@ char* Move::lettersFromPosition(Position &pos)
          break;
    }
    // the row will be a number
-   text[1] = static_cast<char>(pos.getRow() + '1'); // Check this!!!
+   text[1] = static_cast<char>(pos.getRow() + '1'); // cast the int row into a char
    text[2] = '\0'; // Null-terminate the string
    return text;
 }

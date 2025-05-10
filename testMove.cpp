@@ -15,18 +15,19 @@
  /*************************************
   * Constructor : default
   * Input: 
-  * Output: source=INVALID
-  *         dest  =INVALID
+  * Output: source=INVALID (0x99)
+  *         dest  =INVALID (0x99)
   **************************************/
 void TestMove::constructor_default() 
 {  // Setup
    // Exercise
    Move m = Move();
    // Verify
-   assertEquals(m.source.getRow(), -1);
-   assertEquals(m.source.getCol(), -1);
-   assertEquals(m.dest.getRow(),   -1);
-   assertEquals(m.dest.getCol(),   -1);
+   assertEquals(m.source.colRow, 0x99);
+   assertEquals(m.dest.colRow,   0x99);
+   assertEquals(m.promote, INVALID);
+   assertEquals(m.capture, INVALID);
+   assertEquals(m.moveType, Move::MOVE_ERROR);
 }  // Teardown
 
  /*************************************
