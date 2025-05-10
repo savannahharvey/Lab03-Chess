@@ -191,31 +191,33 @@ string Move::getText()
    // add sourceText to the text, then destText.
    strcat(text, sourceText); // text[0] text[1]
    strcat(text, destText); // text[2] text[3]
-   if (moveType == MOVE && capture == INVALID)
+   
+   // Assign the last caracter if applicable
+   if (moveType == MOVE && capture == INVALID) // No extra characters
    {
-      text[4] = '\0';
+      text[4] = '\0'; // null terminate
    }
-   else if (moveType == ENPASSANT)
+   else if (moveType == ENPASSANT) // En-passant
    {
       text[4] = 'E';
-      text[5] = '\0';
+      text[5] = '\0'; // null terminate
    }
-   else if (moveType == CASTLE_KING)
+   else if (moveType == CASTLE_KING) // Castle
    {
       text[4] = 'c';
-      text[5] = '\0';
+      text[5] = '\0'; // null terminate
    }
-   else if (moveType == CASTLE_QUEEN)
+   else if (moveType == CASTLE_QUEEN) // Castle
    {
       text[4] = 'C';
-      text[5] = '\0';
+      text[5] = '\0'; // null terminate
    }
-   else
+   else // If we get here, that means its a regular move but a capture has happened
    {
-      text[4] = letterFromPieceType(capture);
-      text[5] = '\0';
+      text[4] = letterFromPieceType(capture); // assign the capture
+      text[5] = '\0'; // null terminate
    }
-      
+   // Convert to string
    string t = text;
    return t;
 }
