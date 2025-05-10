@@ -24,6 +24,7 @@ Move::Move()
    // start with something
    this->source = Position();
    this->dest   = Position();
+   this->capture = INVALID;
 }
 
 /***************************************************
@@ -182,29 +183,39 @@ PieceType Move::pieceTypeFromLetter(char letter) const
  ***************************************************/
 string Move::getText()
 {
-   char* text = new char(5);
+   char* text = new char[6];
    // get the first 4 characters for locations.
    char* sourceText = this->lettersFromPosition(source);
    char* destText = this->lettersFromPosition(dest);
    
    // add sourceText to the text, then destText.
-   strcat(text, sourceText);
-   strcat(text, destText);
-   
-   // add the last part.
-//   switch (moveType) {
-//      case ENPASSANT:
-//         text += 'E';
-//         break;
-//      case CASTLE_KING:
-//         text += 'c';
-//         break;
-//      case CASTLE_QUEEN:
-//         text += 'C';
-//         break;
-//      default:
-//         break;
-//   }
+   strcat(text, sourceText); // text[0] text[1]
+   strcat(text, destText); // text[2] text[3]
+   if (moveType == MOVE && capture == INVALID)
+   {
+      text[4] = '\0';
+   }
+   else if (moveType == ENPASSANT)
+   {
+      text[4] = 'E';
+      text[5] = '\0';
+   }
+   else if (moveType == CASTLE_KING)
+   {
+      text[4] = 'c';
+      text[5] = '\0';
+   }
+   else if (moveType == CASTLE_QUEEN)
+   {
+      text[4] = 'C';
+      text[5] = '\0';
+   }
+   else
+   {
+      text[4] = letterFromPieceType(capture);
+      text[5] = '\0';
+   }
+      
    string t = text;
    return t;
 }
@@ -217,10 +228,10 @@ string Move::getText()
 char* Move::lettersFromPosition(Position &pos)
 {
    // This will be 2 characters long.
-   char* text = new char;
+   char* text = new char[3];
    
    // Turn the column into a letter
-   switch (pos.getCol() + 1) {
+   switch (pos.getCol()) {
       case 0:
          text[0] = 'a';
          break;
@@ -250,6 +261,7 @@ char* Move::lettersFromPosition(Position &pos)
          break;
    }
    // the row will be a number
-   text[1] = static_cast<char>((pos.getRow() + 1) + '1'); // Check this!!!
+   text[1] = static_cast<char>(pos.getRow() + '1'); // Check this!!!
+   text[2] = '\0'; // Null-terminate the string
    return text;
 }

@@ -77,9 +77,17 @@ void TestMove::read_simple()
   *         capture=ROOK
   **************************************/
 void TestMove::read_capture()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   string str = "e5d6r";
+   char* textRhs = &str[0];
+   // Exercise
+   Move m = textRhs;
+   // Verify
+   assertEquals(m.source.colRow, 0x44);
+   assertEquals(m.dest.colRow,   0x35);
+   assertEquals(m.moveType, Move::MOVE);
+   assertEquals(m.capture, ROOK);
+}  // Teardown
 
  /*************************************
   * READ enpassant move 
@@ -89,9 +97,16 @@ void TestMove::read_capture()
   *         type  =ENPASSANT
   **************************************/
 void TestMove::read_enpassant()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   string str = "e5f6E";
+   char* textRhs = &str[0];
+   // Exercise
+   Move m = textRhs;
+   // Verify
+   assertEquals(m.source.colRow, 0x44);
+   assertEquals(m.dest.colRow,   0x55);
+   assertEquals(m.moveType, Move::ENPASSANT);
+}  // Teardown
 
  /*************************************
   * READ king side castle
@@ -101,9 +116,16 @@ void TestMove::read_enpassant()
   *         type  =CASTLE_KING
   **************************************/
 void TestMove::read_castleKing()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   string str = "e1g1c";
+   char* textRhs = &str[0];
+   // Exercise
+   Move m = textRhs;
+   // Verify
+   assertEquals(m.source.colRow, 0x40);
+   assertEquals(m.dest.colRow,   0x60);
+   assertEquals(m.moveType, Move::CASTLE_KING);
+}  // Teardown
 
  /*************************************
   * READ queen side castle
@@ -113,9 +135,16 @@ void TestMove::read_castleKing()
   *         type  =CASTLE_QUEEN
   **************************************/
 void TestMove::read_castleQueen()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   string str = "e1c1C";
+   char* textRhs = &str[0];
+   // Exercise
+   Move m = textRhs;
+   // Verify
+   assertEquals(m.source.colRow, 0x40);
+   assertEquals(m.dest.colRow,   0x20);
+   assertEquals(m.moveType, Move::CASTLE_QUEEN);
+}  // Teardown
 
  /*************************************
   * ASSIGN simple move
@@ -229,15 +258,13 @@ void TestMove::assign_castleQueen()
 void TestMove::getText_simple()
 {  // Setup
    Move m;
-   m.source.colRow = 0x33;
-   m.dest.colRow   = 0x34;
+   m.source.colRow = 0x44;
+   m.dest.colRow   = 0x45;
    m.moveType = Move::MOVE;
-   string results = "e5e6\0";
    // Exercise
-   string text = m.getText();
-   std::cout << "|" << text << "| = |" << results << "|" << "\n";
+   string text =  m.getText();
    // Verify
-   assertUnit(text == results);
+   assertUnit(text == "e5e6");
 }  // Teardown
 
  /*************************************
@@ -251,8 +278,8 @@ void TestMove::getText_simple()
 void TestMove::getText_capture()
 {  // Setup
    Move m;
-   m.source.colRow = 0x33;
-   m.dest.colRow   = 0x34;
+   m.source.colRow = 0x44;
+   m.dest.colRow   = 0x45;
    m.moveType = Move::MOVE;
    m.capture = ROOK;
    // Exercise
@@ -272,8 +299,8 @@ void TestMove::getText_capture()
 void TestMove::getText_enpassant()
 {  // Setup
    Move m;
-   m.source.colRow = 0x33;
-   m.dest.colRow   = 0x44;
+   m.source.colRow = 0x44;
+   m.dest.colRow   = 0x55;
    m.moveType = Move::ENPASSANT;
    m.capture = PAWN;
    // Exercise
@@ -292,8 +319,8 @@ void TestMove::getText_enpassant()
 void TestMove::getText_castleKing()
 {  // Setup
    Move m;
-   m.source.colRow = 0x30;
-   m.dest.colRow   = 0x50;
+   m.source.colRow = 0x40;
+   m.dest.colRow   = 0x60;
    m.moveType = Move::CASTLE_KING;
    // Exercise
    string text = m.getText();
@@ -311,8 +338,8 @@ void TestMove::getText_castleKing()
 void TestMove::getText_castleQueen()
 {  // Setup
    Move m;
-   m.source.colRow = 0x30;
-   m.dest.colRow   = 0x10;
+   m.source.colRow = 0x40;
+   m.dest.colRow   = 0x20;
    m.moveType = Move::CASTLE_QUEEN;
    // Exercise
    string text = m.getText();
