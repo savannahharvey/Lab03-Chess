@@ -12,6 +12,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <cstring>
 
 using namespace std;
 
@@ -58,31 +59,16 @@ void Move::parse(char* t)
       {
             // Captures
          case 'p':   // capture a pawn
-            this->capture = PAWN;
-            this->moveType = MOVE;
-            break;
          case 'n':   // capture a knight
-            this->capture = KNIGHT;
-            this->moveType = MOVE;
-            break;
          case 'b':   // capture a bishop
-            this->capture = BISHOP;
-            this->moveType = MOVE;
-            break;
          case 'r':   // capture a rook
-            this->capture = ROOK;
-            this->moveType = MOVE;
-            break;
          case 'q':   // capture a queen
-            this->capture = QUEEN;
-            this->moveType = MOVE;
-            break;
          case 'k':   // !! you can't capture a king you silly!
-            this->capture = KING;
+            this->capture = this->pieceTypeFromLetter(*it);
             this->moveType = MOVE;
             break;
             
-            // Castling & En-Passant
+            // Move Types
          case 'c':  // short castling or king's castle
             this->moveType = CASTLE_KING;
             break;
@@ -93,21 +79,12 @@ void Move::parse(char* t)
             this->moveType = ENPASSANT;
             break;
             
-            // Promotion
+            // Promotions
          case 'N':  // Promote to knight
-            this->promote = KNIGHT;
-            this->moveType = MOVE;
-            break;
          case 'B':  // Promote to Bishop
-            this->promote = BISHOP;
-            this->moveType = MOVE;
-            break;
          case 'R':  // Promote to Rook
-            this->promote = ROOK;
-            this->moveType = MOVE;
-            break;
          case 'Q':  // Promote to Queen
-            this->promote = QUEEN;
+            this->promote = this->pieceTypeFromLetter(*it);
             this->moveType = MOVE;
             break;
             
@@ -117,6 +94,7 @@ void Move::parse(char* t)
             break;
       }
    }
+   // If there is no text after the locations.
    else
    {
       this->moveType = MOVE;
@@ -198,3 +176,80 @@ PieceType Move::pieceTypeFromLetter(char letter) const
    return piece;
 }
 
+/***************************************************
+ * MOVE : GET TEXT
+ * Turn the object back into Universal Chess Interface notation.
+ ***************************************************/
+string Move::getText()
+{
+   char* text = new char(5);
+   // get the first 4 characters for locations.
+   char* sourceText = this->lettersFromPosition(source);
+   char* destText = this->lettersFromPosition(dest);
+   
+   // add sourceText to the text, then destText.
+   strcat(text, sourceText);
+   strcat(text, destText);
+   
+   // add the last part.
+//   switch (moveType) {
+//      case ENPASSANT:
+//         text += 'E';
+//         break;
+//      case CASTLE_KING:
+//         text += 'c';
+//         break;
+//      case CASTLE_QUEEN:
+//         text += 'C';
+//         break;
+//      default:
+//         break;
+//   }
+   string t = text;
+   return t;
+}
+
+/***************************************************
+ * MOVE : LETTERS FROM POSITION
+ * convert a chess position object into the Universal Chess
+ * Interface notation representation.
+ ***************************************************/
+char* Move::lettersFromPosition(Position &pos)
+{
+   // This will be 2 characters long.
+   char* text = new char;
+   
+   // Turn the column into a letter
+   switch (pos.getCol() + 1) {
+      case 0:
+         text[0] = 'a';
+         break;
+      case 1:
+         text[0] = 'b';
+         break;
+      case 2:
+         text[0] = 'c';
+         break;
+      case 3:
+         text[0] = 'd';
+         break;
+      case 4:
+         text[0] = 'e';
+         break;
+      case 5:
+         text[0] = 'f';
+         break;
+      case 6:
+         text[0] = 'g';
+         break;
+      case 7:
+         text[0] = 'h';
+         break;
+      default:
+         text[0] = '!';
+         break;
+   }
+   // the row will be a number
+   text[1] = static_cast<char>((pos.getRow() + 1) + '1'); // Check this!!!
+   return text;
+}

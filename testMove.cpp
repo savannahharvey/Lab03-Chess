@@ -38,8 +38,10 @@ void TestMove::constructor_default()
   **************************************/
 void TestMove::constructString_simple()
 {  // Setup
+   string str = "e5e6";
+   char* text = &str[0];
    // Exercise
-   Move m("e5e6");
+   Move m(text);
    // Verify
    assertEquals(m.source.colRow, 0x44);
    assertEquals(m.dest.colRow,   0x45);
@@ -56,15 +58,13 @@ void TestMove::constructString_simple()
 void TestMove::read_simple()
 {
    // Setup
-   std::string str = "e5e6";
-   char* t = &str[0];
+   string str = "e5e6";
+   char* textRhs = &str[0];
    // Exercise
-   Move m = t;
+   Move m = textRhs;
    // Verify
-   assertEquals(m.source.getRow(), 4);
-   assertEquals(m.source.getCol(), 4);
-   assertEquals(m.dest.getRow(),   4);
-   assertEquals(m.dest.getCol(),   5);
+   assertEquals(m.source.colRow, 0x44);
+   assertEquals(m.dest.colRow,   0x45);
    assertEquals(m.moveType, Move::MOVE);
 }  // Teardown
 
@@ -127,8 +127,10 @@ void TestMove::read_castleQueen()
 void TestMove::assign_simple()
 {  // Setup
    Move moveLhs;
+   string str = "e5e6";
+   char* textRhs = &str[0];
    // Exercise
-   moveLhs = "e5e6";
+   moveLhs = textRhs;
    // Verify
    assertUnit(moveLhs.source.colRow == 0x44);
    assertUnit(moveLhs.dest.colRow == 0x45);
@@ -146,8 +148,10 @@ void TestMove::assign_simple()
 void TestMove::assign_capture()
 {  // Setup
    Move moveLhs;
+   string str = "e5d6r";
+   char* textRhs = &str[0];
    // Exercise
-   moveLhs = "e5d6r";
+   moveLhs = textRhs;
    // Verify
    assertUnit(moveLhs.source.colRow == 0x44);
    assertUnit(moveLhs.dest.colRow == 0x35);
@@ -165,8 +169,10 @@ void TestMove::assign_capture()
 void TestMove::assign_enpassant()
 {  // Setup
    Move moveLhs;
+   string str = "e5f6E";
+   char* textRhs = &str[0];
    // Exercise
-   moveLhs = "e5f6E";
+   moveLhs = textRhs;
    // Verify
    assertUnit(moveLhs.source.colRow == 0x44);
    assertUnit(moveLhs.dest.colRow == 0x55);
@@ -183,8 +189,10 @@ void TestMove::assign_enpassant()
 void TestMove::assign_castleKing()
 {  // Setup
    Move moveLhs;
+   string str = "e1g1c";
+   char* textRhs = &str[0];
    // Exercise
-   moveLhs = "e1g1c";
+   moveLhs = textRhs;
    // Verify
    assertUnit(moveLhs.source.colRow == 0x40);
    assertUnit(moveLhs.dest.colRow == 0x60);
@@ -201,8 +209,10 @@ void TestMove::assign_castleKing()
 void TestMove::assign_castleQueen()
 {  // Setup
    Move moveLhs;
+   string str = "e1c1C";
+   char* textRhs = &str[0];
    // Exercise
-   moveLhs = "e1c1C";
+   moveLhs = textRhs;
    // Verify
    assertUnit(moveLhs.source.colRow == 0x40);
    assertUnit(moveLhs.dest.colRow == 0x20);
@@ -217,9 +227,18 @@ void TestMove::assign_castleQueen()
   * Output:  e5e6
   **************************************/
 void TestMove::getText_simple()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move m;
+   m.source.colRow = 0x33;
+   m.dest.colRow   = 0x34;
+   m.moveType = Move::MOVE;
+   string results = "e5e6\0";
+   // Exercise
+   string text = m.getText();
+   std::cout << "|" << text << "| = |" << results << "|" << "\n";
+   // Verify
+   assertUnit(text == results);
+}  // Teardown
 
  /*************************************
   * GET TEXT capture
@@ -230,9 +249,17 @@ void TestMove::getText_simple()
   * Output:  e5e6r
   **************************************/
 void TestMove::getText_capture()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move m;
+   m.source.colRow = 0x33;
+   m.dest.colRow   = 0x34;
+   m.moveType = Move::MOVE;
+   m.capture = ROOK;
+   // Exercise
+   string text = m.getText();
+   // Verify
+   assertUnit(text == "e5e6r");
+}  // Teardown
 
  /*************************************
   * GET TEXT en passant
@@ -243,9 +270,17 @@ void TestMove::getText_capture()
   * Output:  e5f6E
   **************************************/
 void TestMove::getText_enpassant()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move m;
+   m.source.colRow = 0x33;
+   m.dest.colRow   = 0x44;
+   m.moveType = Move::ENPASSANT;
+   m.capture = PAWN;
+   // Exercise
+   string text = m.getText();
+   // Verify
+   assertUnit(text == "e5f6E");
+}  // Teardown
 
  /*************************************
   * GET TEXT king side castle
@@ -255,9 +290,16 @@ void TestMove::getText_enpassant()
   * Output:  e1g1c
   **************************************/
 void TestMove::getText_castleKing()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move m;
+   m.source.colRow = 0x30;
+   m.dest.colRow   = 0x50;
+   m.moveType = Move::CASTLE_KING;
+   // Exercise
+   string text = m.getText();
+   // Verify
+   assertUnit(text == "e1g1c");
+}  // Teardown
 
  /*************************************
   * GET TEXT queen side castle
@@ -267,9 +309,16 @@ void TestMove::getText_castleKing()
   * Output:  e1c1C
   **************************************/
 void TestMove::getText_castleQueen()
-{
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+{  // Setup
+   Move m;
+   m.source.colRow = 0x30;
+   m.dest.colRow   = 0x10;
+   m.moveType = Move::CASTLE_QUEEN;
+   // Exercise
+   string text = m.getText();
+   // Verify
+   assertUnit(text == "e1c1C");
+}  // Teardown
 
  /*************************************
   * LETTER FROM PIECE TYPE space
@@ -475,11 +524,11 @@ void TestMove::pieceTypeFromLetter_king()
 void TestMove::equal_not()
 {  // Setup
    Move moveLhs;
-   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveLhs.source.colRow = 0x11;
+   moveLhs.dest.colRow   = 0x13;
    Move moveRhs;
-   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveRhs.dest.set(1, 4);   // b5 -> col 1, row 4
+   moveRhs.source.colRow = 0x11;
+   moveRhs.dest.colRow   = 0x14;
    bool response;
    // Exercise
    response = moveLhs == moveRhs;
@@ -495,11 +544,11 @@ void TestMove::equal_not()
 void TestMove::equal_equals()
 {  // Setup
    Move moveLhs;
-   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveLhs.source.colRow = 0x11;
+   moveLhs.dest.colRow   = 0x13;
    Move moveRhs;
-   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveRhs.source.colRow = 0x11;
+   moveRhs.dest.colRow   = 0x13;
    bool response;
    // Exercise
    response = moveLhs == moveRhs;
@@ -520,16 +569,16 @@ void TestMove::equal_equals()
 void TestMove::lessthan_lessthan()
 {  // Setup
    Move moveLhs;
-   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveLhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   moveLhs.source.colRow = 0x11;
+   moveLhs.dest.colRow   = 0x11;
    Move moveRhs;
-   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveRhs.source.colRow = 0x11;
+   moveRhs.dest.colRow   = 0x13;
    bool response;
    // Exercise
    response = moveLhs < moveRhs;
    // Verify
-   assertUnit(response == true); // is the false a typo?
+   assertUnit(response == true);
 }  // Teardown
 
  /*************************************
@@ -540,11 +589,11 @@ void TestMove::lessthan_lessthan()
 void TestMove::lessthan_equals()
 {  // Setup
    Move moveLhs;
-   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveLhs.source.colRow = 0x11;
+   moveLhs.dest.colRow   = 0x13;
    Move moveRhs;
-   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveRhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveRhs.source.colRow = 0x11;
+   moveRhs.dest.colRow   = 0x13;
    bool response;
    // Exercise
    response = moveLhs < moveRhs;
@@ -561,11 +610,11 @@ void TestMove::lessthan_equals()
 void TestMove::lessthan_greaterthan()
 {  // Setup
    Move moveLhs;
-   moveLhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveLhs.dest.set(1, 3);   // b4 -> col 1, row 3
+   moveLhs.source.colRow = 0x11;
+   moveLhs.dest.colRow   = 0x13;
    Move moveRhs;
-   moveRhs.source.set(1, 1); // b2 -> col 1, row 1
-   moveRhs.dest.set(1, 1);   // b2 -> col 1, row 1
+   moveRhs.source.colRow = 0x11;
+   moveRhs.dest.colRow   = 0x11;
    bool response;
    // Exercise
    response = moveLhs < moveRhs;
