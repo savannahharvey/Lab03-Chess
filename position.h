@@ -162,10 +162,8 @@ public:
       if (getCol() == -1 || getRow() == -1)
          colRow = 0xff;
       else
-      {
-         set(    (int)(x / getSquareWidth()) - 1,
-             8 - (int)(y / getSquareHeight()));
-      }
+         set((int)(x / getSquareWidth()) - 1,
+            8 - (int)(y / getSquareHeight()));
    }
    double getSquareWidth()  const { return squareWidth;  }
    double getSquareHeight() const { return squareHeight; }
