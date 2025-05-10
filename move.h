@@ -31,18 +31,21 @@ public:
 
    // constructor
    Move();
-   Move(char* t);
+   Move(char* t) { this->parse(t); }
    
    // operators
-   bool operator == (Move &rhs) { return source.getLocation() == rhs.source.getLocation() &&
-                                           dest.getLocation() == rhs.dest.getLocation(); }
-   bool operator <  (Move &rhs) { return dest.getLocation() < rhs.dest.getLocation(); }
+   bool operator == (Move &rhs) const { return source.getLocation() == rhs.source.getLocation() &&
+                                                 dest.getLocation() == rhs.dest.getLocation(); }
+   bool operator <  (Move &rhs) const { return dest.getLocation() < rhs.dest.getLocation(); }
+   Move& operator = (char* t)         { this->parse(t); return *this; }
    
    // Methods
    string getText();
 
 
 private:
+   void parse(char* t);
+   char* lettersFromPosition(Position &pos);
    char letterFromPieceType(PieceType pt)     const;
    PieceType pieceTypeFromLetter(char letter) const;
 
