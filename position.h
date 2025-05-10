@@ -9,6 +9,9 @@
 
 #pragma once
 
+#include <iostream>
+using namespace std;
+
 #include <cassert>
 
 #include <string>
@@ -152,8 +155,17 @@ public:
    }
    void setXY(double x, double y)
    {
-      set(    (int)(x / getSquareWidth ()) - 1,
-          8 - (int)(y / getSquareHeight())   );
+      if (((int)(x / getSquareWidth()) - 1) > 7 || ((int)(x / getSquareWidth()) - 1) < 0)
+         colRow = 0xff;
+      if (8 - (int)(y / getSquareHeight()) > 7 || (8 - (int)(y / getSquareHeight())) < 0)
+         colRow = 0xff;
+      if (getCol() == -1 || getRow() == -1)
+         colRow = 0xff;
+      else
+      {
+         set(    (int)(x / getSquareWidth()) - 1,
+             8 - (int)(y / getSquareHeight()));
+      }
    }
    double getSquareWidth()  const { return squareWidth;  }
    double getSquareHeight() const { return squareHeight; }
@@ -176,12 +188,12 @@ public:
        int row = rhs.dRow;
        int col = rhs.dCol;
 
-       if (getCol() + col > 7 || getCol() + col < 0)
-           set(15, 15);
-       if (getRow() + row > 7 || getRow() + row < 0)
-           set(15, 15);
+       if ((getCol() + col) > 7 || (getCol() + col) < 0)
+          colRow = 0xff;
+       if ((getRow() + row) > 7 || (getRow() + row) < 0)
+          colRow = 0xff;
        if (getCol() == -1 || getRow() == -1)
-           set(15, 15);
+          colRow = 0xff;
        else
            set(getCol() + col, getRow() + row);
 

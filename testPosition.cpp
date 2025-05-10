@@ -12,6 +12,9 @@
 #include "position.h"     // for POSITION
 #include <cassert>        // for ASSERT
 
+#include <iostream>
+using namespace std;
+
 
 /***********************************************
  * GET  Zero
@@ -1538,7 +1541,7 @@ void PositionTest::setXY_invalidYMin()
    pos.setXY(x, y);
 
    // VERIFY
-   assertUnit(pos.colRow == 0x3f);
+   assertUnit(pos.colRow == 0xff);
 
    // TEARDOWN
    pos.squareWidth = squareWidth;
@@ -1577,7 +1580,7 @@ void PositionTest::setXY_invalidYMax()
    pos.setXY(x, y);
 
    // VERIFY
-   assertUnit(pos.colRow == 0x3f);
+   assertUnit(pos.colRow == 0xff);
 
    // TEARDOWN
    pos.squareWidth = squareWidth;
